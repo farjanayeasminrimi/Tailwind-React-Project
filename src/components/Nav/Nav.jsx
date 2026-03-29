@@ -31,7 +31,7 @@ const Nav = () => {
   };
   const link = navItems.map((route) => <Link key={route.id} route={route}></Link>);
   return (
-    <nav className="px-6 py-3 flex justify-between items-center">
+    <nav className="px-6 py-3 flex justify-between items-center  shadow-md shadow-amber-950">
       <span onClick={handlerMenu} className="flex gap-3 justify-center items-center">
         {menu ? (
           <X className="inline-block md:hidden"></X>
