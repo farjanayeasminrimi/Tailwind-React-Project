@@ -1,5 +1,6 @@
-import { Menu } from "lucide-react";
-import React from "react";
+import { Menu, X } from "lucide-react";
+import React, { useState } from "react";
+import Link from "./Link";
 
 const navItems = [
   {
@@ -24,18 +25,33 @@ const navItems = [
   },
 ];
 const Nav = () => {
+  const [menu, setMenu] = useState(false);
+  const handlerMenu = () => {
+    setMenu(!menu);
+  };
+  const link = navItems.map((route) => <Link key={route.id} route={route}></Link>);
   return (
     <nav className="px-6 py-3 flex justify-between items-center">
-      <span className="flex gap-3 justify-center items-center">
-        <Menu className="inline-block md:hidden" />
+      <span onClick={handlerMenu} className="flex gap-3 justify-center items-center">
+        {menu ? (
+          <X className="inline-block md:hidden"></X>
+        ) : (
+          <Menu className="inline-block md:hidden"></Menu>
+        )}
+        <ul
+          className={`md:hidden bg-amber-50 text-black  py-4 absolute duration-700 ${menu ? "top-16" : "-top-36"} z-10`}
+        >
+          {link}
+        </ul>
         <h1 className="text-2xl">Nav</h1>
       </span>
-      <ul className="md:flex hidden">
-        {navItems.map((item) => (
+      <ul className="md:flex gap-4 hidden">
+        {link}
+        {/* {navItems.map((item) => (
           <li key={item.id} className="ml-4">
             <a href={item.path}>{item.name}</a>
           </li>
-        ))}
+        ))} */}
       </ul>
       <button className="btn">Sign Up</button>
     </nav>
